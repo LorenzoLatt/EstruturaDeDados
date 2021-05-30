@@ -4,52 +4,65 @@ public class Vetor {
 
 
     final private int[] elementosVetor;
-    private int indice = 0;
-    final private int tamanho = 10;
+    int ocupados = 0;
 
-    public Vetor() {
+    public Vetor(int tamanho) {
 
 
         elementosVetor = new int[tamanho];
 
     }
 
-    public void addElemento(int valor) {
+    public boolean addElemento(int valor) {
 
-        if(elementosVetor[indice] == 0 && valor > 0) {
+        if(valor == 0) {
 
-            elementosVetor[indice] = valor;
-            indice++;
-        } else if(valor == 0) {
-
-            System.out.println("Número vazio. Não preenche o vetor.");
-        }
-        if(vetorCheio()) {
-
-            System.out.println("Vetor já preenchido");
+            return false;
         }
 
+        for (int i = 0; i < elementosVetor.length; i++) {
+
+            if (elementosVetor[i] == 0) {
+
+                elementosVetor[i] = valor;
+                ocupados++;
+                return true;
+
+            }
+        }
+        return true;
     }
+
+
     public void mostrarVetor() {
 
         for(int array: elementosVetor) {
 
             System.out.print(array + " - ");
         }
+
     }
 
-    public void apagarValor(int valorApagado) {
+    public boolean apagarValor(int valorApagado) {
 
-        for(int i = 1; i <= elementosVetor.length; i++) {
+        for (int i = 0; i < ocupados; i++) {
 
-            if(i == valorApagado) {
+            if(valorApagado > ocupados) {
 
-                elementosVetor[i - 1] = 0;
+                return true;
+
+            } else {
+
+                elementosVetor[valorApagado - 1] = 0;
+                ocupados--;
             }
         }
+        return false;
     }
 
+
     public void consultarValor(int valorConsulta) {
+
         int elementoConsulta = 0;
         for (int i = 0; i < elementosVetor.length; i++) {
 
@@ -69,67 +82,41 @@ public class Vetor {
         }
     }
 
-    public void maiorNumero() {
+    public int maiorNumero() {
 
-         int maiorNumero = elementosVetor[0];
+        int maiorNumero = elementosVetor[0];
 
-         for(int i = 0; i < elementosVetor.length; i++) {
-
-             if(elementosVetor[i] > maiorNumero) {
-
-                 maiorNumero = elementosVetor[i];
-         }
-
-     }
-        System.out.println(maiorNumero);
-    }
-
-    public void menorNumero() {
-        int menorNumero = elementosVetor[0];
-        for(int i = 0; i < elementosVetor.length; i++) {
-
-
-
-
-            if(elementosVetor[i] < menorNumero) {
-
-                menorNumero = elementosVetor[i];
-
-            }
-        }
-        System.out.println(menorNumero);
-    }
-
-    public void verificarNumeros() {
-        int contador = 0;
-        for(int i = 0; i < elementosVetor.length; i++) {
-
-            if(elementosVetor[i] == 0) {
-
-                contador++;
-            }
-        }
-
-        System.out.println("Existem " + contador + " elementos vazios no vetor e " + (elementosVetor.length -
-                contador) + " elementos numéricos válidos.");
-    }
-
-    public boolean vetorCheio() {
-        int contador = 0;
         for(int numero: elementosVetor) {
 
-            if(numero != 0) {
+            if(maiorNumero < numero)
 
-                contador++;
+            maiorNumero = numero;
+        }
+
+        return maiorNumero;
+
+    }
+
+
+    public int menorNumero() {
+
+        int menorNumero = elementosVetor[0];
+
+        for(int i = 0; i < ocupados; i++) {
+
+            if(elementosVetor[i] != 0 && menorNumero > elementosVetor[i]) {
+
+                menorNumero = elementosVetor[i];
             }
         }
-
-        if(contador == 10) {
-
-            return true;
-        }
-        return false;
+        return menorNumero;
     }
-    
+
+    public int verificarNumeros() {
+
+        return ocupados;
+    }
+
+
 }
 
