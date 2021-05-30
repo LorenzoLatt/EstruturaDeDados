@@ -6,7 +6,8 @@ public class VetorTeste {
 
         Scanner sc = new Scanner(System.in);
 
-        Vetor vetor = new Vetor();
+        int tamanho = 10;
+        Vetor vetor = new Vetor(tamanho);
 
         int numero;
         do {
@@ -18,77 +19,78 @@ public class VetorTeste {
             System.out.println("6 - Mostrar vetor");
             System.out.println("7 - Consultar número de elementos:");
             System.out.println("0 - Encerrar programa");
-            System.out.println("Escolha o que você deseja consultar:");
+            System.out.println("\nEscolha o que você deseja consultar:");
             numero = sc.nextInt();
 
 
-            switch(numero){
+            switch (numero) {
 
-                case 1:
-
-                    if(vetor.vetorCheio()) {
+                case 1 -> {
+                    if (vetor.verificarNumeros() == tamanho) {
 
                         System.out.println("Vetor já está completamente preenchido");
 
-                        break;
+                    } else {
+                        System.out.println("Insira um número no vetor:");
+                        int adicionar = sc.nextInt();
+                        vetor.addElemento(adicionar);
+                        vetor.mostrarVetor();
                     }
+                }
 
-                    System.out.println("Insira um número no vetor:");
-                    int adicionar = sc.nextInt();
-                    vetor.addElemento(adicionar);
-                    vetor.mostrarVetor();
-                    break;
+                case 2 -> {
 
-                case 2:
+                    if (vetor.ocupados == 0) {
 
-                    System.out.println("Informe qual a posição do número que você deseja apagar(de 1 a 10");
-                    int numeroApagado = sc.nextInt();
-                    while(numeroApagado <= 0 || numeroApagado > 10 ) {
+                        System.out.println("Não existem elementos no vetor ainda.");
 
-                        System.out.println("Informe um número válido:");
-                        numeroApagado = sc.nextInt();
+                    } else {
+                        vetor.mostrarVetor();
+                        System.out.println("\nInforme a posição do número que você deseja apagar");
+                        int numeroApagado = sc.nextInt();
+                        if (vetor.apagarValor(numeroApagado)) {
+
+                            System.out.println("Índice excedido.");
+                            System.out.println(vetor.apagarValor(numeroApagado));
+                        } else {
+                            while (numeroApagado <= 0 || numeroApagado > tamanho) {
+
+                                System.out.println("Informe um número válido:");
+                                numeroApagado = sc.nextInt();
+                            }
+
+                            System.out.println("Vetor antes:");
+                            vetor.mostrarVetor();
+                            vetor.apagarValor(numeroApagado);
+                            System.out.println("Vetor depois:");
+                            vetor.mostrarVetor();
+                        }
                     }
-                    System.out.println("Vetor antes:");
-                    vetor.mostrarVetor();
-                    vetor.apagarValor(numeroApagado);
-                    System.out.println("Vetor depois:");
-                    vetor.mostrarVetor();
-                    break;
-
-                case 3:
+                }
+                case 3 -> {
 
                     System.out.println("Qual valor você deseja consultar se se encontra no vetor?");
                     int consulta = sc.nextInt();
                     vetor.consultarValor(consulta);
                     vetor.mostrarVetor();
+                }
 
-                    break;
+                case 4 -> {
 
-                case 4:
+                        vetor.mostrarVetor();
+                        System.out.println("\n Maior Número - > " + vetor.maiorNumero());
+                    }
 
-                    vetor.maiorNumero();
-                    break;
+                case 5 -> {
 
-                case 5:
+                        vetor.mostrarVetor();
+                        System.out.println("\nMenor número - > " + vetor.menorNumero());
+                }
+                case 6 -> vetor.mostrarVetor();
 
-                    vetor.menorNumero();
-                    vetor.mostrarVetor();
+                case 7 -> System.out.println("Existem " + vetor.verificarNumeros() + " valores no vetor.");
 
-                    break;
-
-                case 6:
-
-                    vetor.mostrarVetor();
-
-                    break;
-
-                case 7:
-
-                    vetor.verificarNumeros();
-
-                    break;
-                case 0:
-                    System.out.println("Programa encerrado!!!");
+                case 0 -> System.out.println("Programa encerrado!!!");
             }
         } while(numero <= 7 && numero > 0);
     }
