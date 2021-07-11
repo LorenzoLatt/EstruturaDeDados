@@ -5,8 +5,7 @@ import java.util.Random;
 public class Vetor {
 
     final private int[] array;
-    private int ocupados;
-    private boolean metodoUsado = false;
+    private int ocupados = 0;
     private boolean estaOrdenado = false;
     private int posicao;
 
@@ -88,6 +87,7 @@ public class Vetor {
 
                 array[i] = 0;
                 estaOrdenado = false;
+                ocupados--;
                 return true;
             }
 
@@ -103,6 +103,7 @@ public class Vetor {
 
                 array[valor] = 0;
                 estaOrdenado = false;
+                ocupados--;
                 break;
             }
 
@@ -121,7 +122,6 @@ public class Vetor {
             }
             posicao++;
         }
-        metodoUsado = true;
         estaOrdenado = false;
 
     }
@@ -139,47 +139,34 @@ public class Vetor {
     public void populaOrdenado(int numero) {
         int contador = 0;
         Random random = new Random();
-        if(!metodoUsado) {
-            array[0] = 100;
-            ocupados = 1;
-            for(int i = 1; i < array.length; i++) {
-                if(contador == numero) {
+        for(int i = 0; i < array.length; i++) {
 
-                    break;
-                }
-                if(array[i] != 0) {
+            if(contador == numero) {
 
-                    continue;
-                }
-                array[i] = array[i - 1] + ((random.nextInt(100)) + 1);
-                ocupados++;
+                break;
+            }
+            if(array[0] == 0) {
+
+                array[0] = random.nextInt(100);
                 contador++;
             }
-            estaOrdenado = false;
-        } else {
+            if(array[i] != 0) {
 
-            for(int i = ocupados; i < array.length; i++) {
-                if(contador == numero) {
-
-                    break;
-                }
-                if(array[i] != 0) {
-
-                    continue;
-                }
-                    array[i] = array[i - 1] + ((random.nextInt(100)) + 1);
-                    ocupados++;
-                    contador++;
+                continue;
             }
+
+            array[i] = array[i - 1] + ((random.nextInt(100)) + 1);
+            ocupados++;
+            contador++;
+
         }
-        metodoUsado = true;
         estaOrdenado = false;
     }
 
     public void populaVetorAleatorio(int numero) {
         int contador = 0;
         Random random = new Random();
-        for(int i = ocupados; i < array.length; i++) {
+        for(int i = 0; i < array.length; i++) {
             if(contador == numero) {
 
                 break;

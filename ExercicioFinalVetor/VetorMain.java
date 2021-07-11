@@ -134,7 +134,7 @@ public class VetorMain {
                         } else {
                             System.out.println("Informe o index do número que você quer remover:");
                             int valor = sc.nextInt();
-                            while (valor > vetor.retornaArray().length - 1 || valor <= 0) {
+                            while (valor > vetor.retornaArray().length - 1 || valor < 0) {
 
                                 System.out.println("Informe um número válido:");
                                 valor = sc.nextInt();
@@ -180,7 +180,7 @@ public class VetorMain {
                             System.out.println("\nQual elemento você deseja conferir se existe no vetor?");
                             int valor = sc.nextInt();
 
-                            while (valor < 0) {
+                            while (valor <= 0) {
 
                                 System.out.println("Informe um número positivo:");
                                 valor = sc.nextInt();
@@ -203,7 +203,7 @@ public class VetorMain {
                             vetor.mostrarVetor();
                             System.out.println("Qual elemento você deseja conferir se existe no vetor?");
                             int valor = sc.nextInt();
-                            while (valor < 0) {
+                            while (valor <= 0) {
 
                                 System.out.println("Informe um valor válido:");
                                 valor = sc.nextInt();
